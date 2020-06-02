@@ -1,15 +1,27 @@
-import React from 'react';
-import './ExploreContainer.css';
+import React from "react";
+import "./ExploreContainer.css";
+import Accueil from "./Accueil";
+import Calendrier from "./Calendrier";
+import Profile from "./Profile";
+import Statistic from "./Statistic";
 
 interface ContainerProps {
   name: string;
 }
 
 const ExploreContainer: React.FC<ContainerProps> = ({ name }) => {
+  if (name === "Accueil") {
+    return <Accueil name={name}></Accueil>;
+  } else if (name === "Calendrier") {
+    return <Calendrier name={name}></Calendrier>;
+  } else if (name === "Profile") {
+    return <Profile name={name}></Profile>;
+  } else if (name === "Statistics") {
+    return <Statistic name={name}></Statistic>;
+  }
   return (
-    <div className="container">
-      <strong>{name}</strong>
-      <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <div>
+      <strong>Lien introuvable, veuillez réessayer</strong>{" "}
     </div>
   );
 };

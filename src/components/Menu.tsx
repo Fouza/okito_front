@@ -8,12 +8,28 @@ import {
   IonMenu,
   IonMenuToggle,
   IonNote,
-} from '@ionic/react';
+  IonButton,
+} from "@ionic/react";
 
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
-import './Menu.css';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import {
+  archiveOutline,
+  archiveSharp,
+  bookmarkOutline,
+  heartOutline,
+  heartSharp,
+  mailOutline,
+  mailSharp,
+  paperPlaneOutline,
+  paperPlaneSharp,
+  trashOutline,
+  trashSharp,
+  warningOutline,
+  warningSharp,
+} from "ionicons/icons";
+import "./Menu.css";
+import { disconnect } from "cluster";
 
 interface AppPage {
   url: string;
@@ -24,74 +40,93 @@ interface AppPage {
 
 const appPages: AppPage[] = [
   {
-    title: 'Inbox',
-    url: '/page/Inbox',
+    title: "Accueil",
+    url: "/page/Accueil",
     iosIcon: mailOutline,
-    mdIcon: mailSharp
+    mdIcon: mailSharp,
   },
   {
-    title: 'Outbox',
-    url: '/page/Outbox',
+    title: "Calendrier",
+    url: "/page/Calendrier",
+    iosIcon: mailOutline,
+    mdIcon: mailSharp,
+  },
+  {
+    title: "Statistiques",
+    url: "/page/Statistics",
     iosIcon: paperPlaneOutline,
-    mdIcon: paperPlaneSharp
+    mdIcon: paperPlaneSharp,
   },
   {
-    title: 'Favorites',
-    url: '/page/Favorites',
+    title: "Profile",
+    url: "/page/Profile",
     iosIcon: heartOutline,
-    mdIcon: heartSharp
+    mdIcon: heartSharp,
   },
   {
-    title: 'Archived',
-    url: '/page/Archived',
+    title: "Archived",
+    url: "/page/Archived",
     iosIcon: archiveOutline,
-    mdIcon: archiveSharp
+    mdIcon: archiveSharp,
   },
   {
-    title: 'Trash',
-    url: '/page/Trash',
+    title: "Trash",
+    url: "/page/Trash",
     iosIcon: trashOutline,
-    mdIcon: trashSharp
+    mdIcon: trashSharp,
   },
-  {
-    title: 'Spam',
-    url: '/page/Spam',
+  /*{
+    title: "Spam",
+    url: "/page/Spam",
     iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
+    mdIcon: warningSharp,
+  },*/
 ];
-
-const labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
 const Menu: React.FC = () => {
   const location = useLocation();
+
+  function disconnect() {
+    localStorage.removeItem("token");
+    localStorage.setItem("connected", "false");
+    console.log(localStorage);
+    window.location.replace("/");
+  }
 
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inbox</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>Okito</IonListHeader>
+          <IonNote>Nahla Villa</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>
-                <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
+                <IonItem
+                  className={
+                    location.pathname === appPage.url ? "selected" : ""
+                  }
+                  routerLink={appPage.url}
+                  routerDirection="none"
+                  lines="none"
+                  detail={false}
+                >
                   <IonIcon slot="start" icon={appPage.iosIcon} />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
               </IonMenuToggle>
             );
           })}
-        </IonList>
-
-        <IonList id="labels-list">
-          <IonListHeader>Labels</IonListHeader>
-          {labels.map((label, index) => (
-            <IonItem lines="none" key={index}>
-              <IonIcon slot="start" icon={bookmarkOutline} />
-              <IonLabel>{label}</IonLabel>
-            </IonItem>
-          ))}
+          <IonMenuToggle key={10} autoHide={false}>
+            <IonButton
+              color="light"
+              fill="clear"
+              //expand="block"
+              onClick={() => disconnect()}
+            >
+              Déconnexion
+            </IonButton>
+          </IonMenuToggle>
         </IonList>
       </IonContent>
     </IonMenu>
