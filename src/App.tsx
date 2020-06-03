@@ -2,6 +2,7 @@ import Menu from "./components/Menu";
 import Page from "./pages/Page";
 import Login from "./components/Login";
 import Statistic from "./components/Statistic";
+import Welcome from "./components/Welcome";
 import React, { useState } from "react";
 import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
@@ -42,7 +43,7 @@ const App: React.FC = () => {
             </IonRouterOutlet>
           </IonSplitPane>
         ) : (
-          <Login></Login>
+          <Welcome></Welcome>
         )}
       </IonReactRouter>
     </IonApp>

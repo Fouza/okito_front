@@ -449,7 +449,70 @@ const Accueil: React.FC<AccueilProps> = ({ name }) => {
       .catch((err) => console.log(err));
   }
 
-  async function searchFoodCat() {}
+  async function searchFoodCat() {
+    await axios
+      .get(
+        `http://localhost:888/api/service/food/listeFoodByCategory?category=${foodCat}`,
+        {
+          headers: {
+            //Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            //"Access-Control-Allow-Methods": "PUT, GET, POST, DELETE, OPTIONS",
+            /*"Access-Control-Allow-Headers":
+                "Origin, X-Requested-With, Content-Type, Accept",*/
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.length > 0) {
+          //let x = isNone;
+          setIsNoneFood(false);
+          setFoodCatResult(res.data);
+        } else {
+          //let x = isNone;
+          setIsNoneFood(true);
+          setFoodCatResult([
+            {
+              id: 0,
+              name: "",
+              image: "",
+              calories: 0,
+              category: {
+                id: 0,
+                name: "",
+                description: "",
+                image: "",
+              },
+              detailfood: {
+                idnutritiondetails: 0,
+                id: 0,
+                name: "",
+                calories: 0,
+                eau: 0,
+                proteins: 0,
+                sucres: 0,
+                fibres: 0,
+                acidessatures: 0,
+                cholesterol: 0,
+                calcium: 0,
+                potasium: 0,
+                sodium: 0,
+                vitamineB9: 0,
+                vitamineC: 0,
+                vitamineB6: 0,
+                vitamineB3: 0,
+                vitamineB12: 0,
+                vitamineD: 0,
+                vitamineE: 0,
+              },
+            },
+          ]);
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 
   async function searchFoodKey() {
     await axios
@@ -681,9 +744,7 @@ const Accueil: React.FC<AccueilProps> = ({ name }) => {
       );
     });
   };
-  console.log(foodCalFrom);
-  console.log(foodCalTo);
-  //console.log(localStorage.getItem("token"));
+
   return (
     <IonContent class="aliments" scrollX={true}>
       <h3 className="title">Exercices</h3>

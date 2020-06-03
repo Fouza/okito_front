@@ -3,6 +3,7 @@ import {
   IonCard,
   IonCardHeader,
   IonCardContent,
+  IonFooter,
   IonHeader,
   IonContent,
   IonPage,
@@ -18,48 +19,98 @@ import {
   IonApp,
   IonImg,
   IonNav,
+  IonText,
 } from "@ionic/react";
 import { IonRouterLink } from "@ionic/react";
-import "./ExploreContainer.css";
-import logo from "../assets/logo.png";
+import train from "../assets/train.svg";
+import food from "../assets/food.svg";
+import statistics from "../assets/statistics.svg";
+
+import "./Welcome.css";
 
 const Welcome: React.FC = () => {
   return (
-    <IonHeader class="nav">
-      <IonGrid>
-        <IonRow class="ion-align-items-center ion-justify-content-center">
+    <IonPage>
+      <IonHeader class="nav">
+        <IonGrid class="grid">
+          <IonRow class="top-nav">
+            <IonCol size="1" class="a">
+              <IonRouterLink href="/welcome">
+                <IonText class="nav-logo">Okito</IonText>
+              </IonRouterLink>
+            </IonCol>
+            <IonCol
+              size="11"
+              class="rest ion-justify-content-center ion-align-items-center"
+            >
+              <IonRouterLink class="rest" href="/login">
+                Se connecter
+              </IonRouterLink>
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+      </IonHeader>
+      <IonContent>
+        <IonRow class="part1">
+          <IonCol sizeMd="8" sizeXl="8" sizeXs="4"></IonCol>
           <IonCol
-            size="1"
-            class="loginBtn ion-justify-content-start ion-align-items-start"
+            sizeMd="4"
+            sizeXl="4"
+            sizeXs="8"
+            class="ion-align-self-center"
           >
-            <IonRouterLink href="/welcome">
-              <IonImg src={logo} />
-              {""}
-            </IonRouterLink>
-          </IonCol>
-
-          <IonCol
-            size="7"
-            class="loginBtn ion-justify-content-end ion-align-items-end"
-          ></IonCol>
-          <IonCol
-            size="2"
-            class="loginBtn ion-justify-content-end ion-align-items-end"
-          >
-            <IonRouterLink class="navBtn">Fonctionnalité</IonRouterLink>
-          </IonCol>
-          <IonCol
-            size="2"
-            class="loginBtn ion-justify-content-end ion-align-items-end
-              "
-          >
-            <IonRouterLink class="navBtn" href="./login">
-              Se connecter
-            </IonRouterLink>
+            <IonText class="h-text">
+              Un mode de vie sain. En toute simplicité.
+            </IonText>
+            <br />
+            <IonText class="b-text">
+              L'appli bien-être qui vous aide à manger sainement pour atteindre
+              vos objectifs santé et perte de poids.
+            </IonText>
           </IonCol>
         </IonRow>
-      </IonGrid>
-    </IonHeader>
+        <IonRow class="ion-justify-content-around about">
+          <IonCol size="3" class="col-about ion-text-center">
+            <IonImg class="about-img" src={train}></IonImg>
+            <IonText class="h-about-text ion-align-items-center">
+              Entraînez-vous !
+            </IonText>
+            <br />
+            <br />
+            <IonText class="b-about-text ">
+              Choisissez les entraînements en fonction de votre besoin et le
+              nombre de calories que vous voulez brûler.
+            </IonText>
+          </IonCol>
+          <IonCol size="3" class="col-about ion-text-center">
+            <IonImg class="about-img" src={food}></IonImg>
+            <IonText class="h-about-text">Mangez bien !</IonText>
+            <br />
+            <br />
+            <IonText class="b-about-text">
+              Choisissez les repas en fonction de votre capacité et le nombre de
+              calories que vous voulez récupérer.
+            </IonText>
+          </IonCol>
+          <IonCol size="3" class="col-about ion-text-center">
+            <IonImg class="about-img" src={statistics}></IonImg>
+            <IonText class="h-about-text">Progressez !</IonText>
+            <br />
+            <br />
+            <IonText class="b-about-text">
+              Suivez votre progression grâce à un ensemble de statistiques et
+              rapports qui vous permetteront de vous situez par rapport aux
+              efforts que vous fournissez.
+            </IonText>
+          </IonCol>
+        </IonRow>
+        <IonFooter class="ion-text-end ion-align-self-center footer">
+          <IonText class="f-text">
+            Made With Love By <strong>Nahla</strong>{" "}
+          </IonText>
+        </IonFooter>
+      </IonContent>
+    </IonPage>
   );
 };
 
